@@ -140,8 +140,42 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  const numberWords = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+
+  let textRepresentation = '';
+
+  for (let i = 0; i < numberStr.length; i += 1) {
+    if (i < numberStr.length && i > 0)
+      textRepresentation = `${textRepresentation} `;
+    const character = numberStr[i];
+    switch (character) {
+      case '-':
+        textRepresentation = `${textRepresentation}minus`;
+        break;
+      case '.':
+      case ',':
+        textRepresentation = `${textRepresentation}point`;
+        break;
+      default:
+        textRepresentation = `${textRepresentation}${
+          numberWords[Number(character)]
+        }`;
+    }
+  }
+
+  return textRepresentation;
 }
 
 /**
